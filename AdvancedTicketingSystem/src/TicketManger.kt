@@ -16,7 +16,17 @@ class TicketManger {
         tickets.add(ticket)
         return ticket
     }
-
+    
+    fun assignUser(ticketId: Int, userId: Int) {
+        val ticket = tickets.find { it.id == ticketId }
+        val user = user.find { it.id == userId }
+        if (ticket != null && user != null) {
+            ticket.assignee = user
+        } else {
+            throw Exception("Ticket or user not found")
+        }
+    }
+    
     fun updateTicketStatus(ticketId: Int, newStatus: String) {
         val ticket = tickets.find { it.id == ticketId }
 
@@ -44,8 +54,30 @@ class TicketManger {
             } catch (e: DateTimeParseException) {
                 println("Invalid date format. Please use YYYY-MM-DD.")
             }
+        }
+    }
+
+    //View Tickets
+    fun viewTickets(){
+        if (tickets.isEmpty()) {
+            println("No tickets available.")
+        } else {
+            println("Current Tickets:")
+            for (i in tickets){
+                println("ID: ${ticket.id}, Description: ${ticket.description}, Priority: ${ticket.priority}, Status: ${ticket.status}, Assignee: ${ticket.assignee?.name ?: "None"}, Due Date: ${ticket.dueDate ?: "None"}")
+            }
+        }
+    }
+
+    //Search Ticket By Id
+    fun searchTicketById(ticketId: Int) {
+        val ticket = tickets.find { it.id == ticketId }
+
+        if (ticket != null) {
+            println("Found Ticket: ID: ${ticket.id}, Description: ${ticket.description}, Priority: ${ticket.priority}, Status: ${ticket.status}, Assignee: ${ticket.assignee?.name ?: "None"}, Due Date: ${ticket.dueDate ?: "None"}")
         } else {
             println("Ticket not found.")
         }
     }
+    
 }
