@@ -14,4 +14,14 @@ class TicketManger {
         tickets.add(ticket)
         return ticket
     }
+
+    fun assignUser(ticketId: Int, userId: Int) {
+        val ticket = tickets.find { it.id == ticketId }
+        val user = user.find { it.id == userId }
+        if (ticket != null && user != null) {
+            ticket.assignee = user
+        } else {
+            throw Exception("Ticket or user not found")
+        }
+    }
 }
