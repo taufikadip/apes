@@ -1,6 +1,6 @@
 data class Ticket(
-    val id: Int
-    var description: String
+    val id: Int,
+    var description: String,
     val priority: String,
     var status: String,
     var assignee: User? = null,
