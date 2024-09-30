@@ -3,3 +3,7 @@
 fun main() {
 
 }
+
+class main{
+
+}
